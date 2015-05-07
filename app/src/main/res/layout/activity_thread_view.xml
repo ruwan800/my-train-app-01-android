@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThreadViewActivity" >
+
+    <ListView android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0fff0f"
+        android:drawSelectorOnTop="false"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/edit_message" />
+
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/container_buttons"
+        android:layout_toLeftOf="@+id/container_buttons" />
+
+    <LinearLayout
+        android:id="@+id/container_buttons"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/button_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/station"
+            android:text="(*)" />
+
+        <ImageButton
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/station"
+            android:text="SEND"
+            android:onClick="sendMessage" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
