@@ -3,6 +3,8 @@ package com.mta.message;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.mta.db.CONDITION;
+import com.mta.db.QueryHolder;
 import com.mta.main.R;
 
 import android.app.Activity;
@@ -22,8 +24,8 @@ import android.widget.ListView;
 public class ThreadViewActivity extends ListActivity {
 
 	String TAG = "MTA";
-	MessageModel threadModel;
-	private BaseListAdapter threadAdapter;
+	private static MessageModel threadModel;
+	private static BaseListAdapter threadAdapter;
 	private static final String DEFAULT = "default";
 	private static final String MESSAGE = "message";
 	private static final String SENDER = "sender";
@@ -33,7 +35,7 @@ public class ThreadViewActivity extends ListActivity {
 	private static final int MESSAGE_LIMIT= 100;
     private ListView listView;
     private String threadId;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -127,5 +129,15 @@ public class ThreadViewActivity extends ListActivity {
 		}
 		return "TA message";
 	}
+
+    public static void updateThread(String threadId) {
+        QueryHolder queryHolder = new QueryHolder(threadModel);
+        queryHolder.addCondition(THREAD_ID, CONDITION.EQ, threadId);
+        queryHolder.setLimit(100);
+        threadModel.update(queryHolder);
+        threadAdapter.notifyDataSetChanged();
+    }
+
+
 
 }

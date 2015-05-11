@@ -49,7 +49,7 @@ public abstract class BaseModel extends ModelBuilder{
 
 	@Override
 	public ArrayList<ContentValues> get(QueryHolder qh) {
-        for (Column column : qh.getFields()) {
+        /*for (Column column : qh.getFields()) {
             if (column.getState().equals(STATE.REMOTE) || column.getState().equals(STATE.SYNCED)) {
                 ArrayList<ContentValues> result = WSC.get(qh);
                 for (ContentValues value : result) {
@@ -57,7 +57,7 @@ public abstract class BaseModel extends ModelBuilder{
                 }
                 break;
             }
-        }
+        }*/
         ArrayList<ContentValues> result = DBC.get(qh);
 		if(DBC.isNewlyCreated()){
 			syncTable();
