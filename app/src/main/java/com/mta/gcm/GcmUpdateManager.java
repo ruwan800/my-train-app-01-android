@@ -21,9 +21,9 @@ public class GcmUpdateManager {
 
     public static void notifyThreadUpdate(String threadId, int messageCount) {
         if (threadUpdates.containsKey(threadId)) {
-            threadUpdates.put(threadId, new AtomicInteger(0));
-        } else {
             threadUpdates.get(threadId).addAndGet(messageCount);
+        } else {
+            threadUpdates.put(threadId, new AtomicInteger(0));
         }
         updateMessageModel(threadId);
     }
