@@ -24,8 +24,8 @@ import android.widget.ListView;
 public class ThreadViewActivity extends ListActivity {
 
 	String TAG = "MTA";
-	private static MessageModel threadModel;
-	private static BaseListAdapter threadAdapter;
+	private MessageModel threadModel;
+	private BaseListAdapter threadAdapter;
 	private static final String DEFAULT = "default";
 	private static final String MESSAGE = "message";
 	private static final String SENDER = "sender";
@@ -52,6 +52,7 @@ public class ThreadViewActivity extends ListActivity {
 		threadModel = new MessageModel(this);
 		threadAdapter = new BaseListAdapter(this);
         threadAdapter.addViewType(DEFAULT, R.layout.list_item_message);
+        threadModel.addUpdateNotifier(threadAdapter);
 		new ThreadDataGetTask().execute();
 	}
 
@@ -130,13 +131,13 @@ public class ThreadViewActivity extends ListActivity {
 		return "TA message";
 	}
 
-    public static void updateThread(String threadId) {
+    /*public static void updateThread(String threadId) {
         QueryHolder queryHolder = new QueryHolder(threadModel);
         queryHolder.addCondition(THREAD_ID, CONDITION.EQ, threadId);
         queryHolder.setLimit(100);
         threadModel.update(queryHolder);
         threadAdapter.notifyDataSetChanged();
-    }
+    }*/
 
 
 

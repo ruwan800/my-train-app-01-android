@@ -2,13 +2,18 @@ package com.mta.db;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.content.ContentValues;
 
-public abstract class BaseBuilder{
+import com.mta.message.BaseListAdapter;
+import com.mta.message.UpdateNotifyHandler;
+
+public abstract class BaseBuilder {
 	
 	protected Map<String, Column> columns = new LinkedHashMap<String, Column>();
+	protected List<UpdateNotifyHandler> updateNotifiers = new ArrayList<UpdateNotifyHandler>();
 
 	protected final Column getColumn(String name){
 		if(columns.containsKey(name)){
@@ -55,4 +60,15 @@ public abstract class BaseBuilder{
 		}
 	}
 
+    public void addUpdateNotifier(UpdateNotifyHandler updateNotifyHandler) {
+        if ( ! updateNotifiers.contains(updateNotifyHandler)) {
+            updateNotifiers.add(updateNotifyHandler);
+        }
+    }
+
+    public void notifyUpdates(){
+        for (UpdateNotifyHandler updateNotifyHandler : updateNotifiers) {
+            updateNotifyHandler.notifyUpdate();
+        }
+    }
 }

@@ -9,11 +9,16 @@ android {
         minSdkVersion 9
         targetSdkVersion 18
     }
-
     buildTypes {
+
+        debug {
+            debuggable true
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            debuggable false
         }
     }
 }

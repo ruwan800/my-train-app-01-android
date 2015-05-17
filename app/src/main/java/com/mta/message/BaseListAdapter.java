@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mta.db.CONDITION;
+import com.mta.db.QueryHolder;
 import com.mta.main.R;
 
 import android.content.ContentValues;
@@ -14,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class BaseListAdapter extends BaseAdapter {
+public class BaseListAdapter extends BaseAdapter implements UpdateNotifyHandler{
 
 	private Map<String,Integer> viewTypeResources = new HashMap<String, Integer>();
 	private Map<String,View> typeViews = new HashMap<String, View>();
@@ -133,4 +135,8 @@ public class BaseListAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+    @Override
+    public void notifyUpdate() {
+        this.notifyDataSetChanged();
+    }
 }

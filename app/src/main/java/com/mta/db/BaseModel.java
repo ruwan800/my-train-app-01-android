@@ -2,6 +2,8 @@ package com.mta.db;
 
 import java.util.ArrayList;
 
+import com.mta.message.ModelUpdateNotifyHandler;
+import com.mta.message.UpdateNotifyHandler;
 import com.mta.util.HTTPRequest;
 
 import android.provider.BaseColumns;
@@ -9,7 +11,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 
-public abstract class BaseModel extends ModelBuilder{
+public abstract class BaseModel extends ModelBuilder  implements ModelUpdateNotifyHandler {
 
 	private final String SYNCED = "synced";
 	private Context context;
@@ -88,7 +90,13 @@ public abstract class BaseModel extends ModelBuilder{
 		for(ContentValues cv : cvList){
 			DBC.add(cv);
 		}
+        notifyUpdates();
 		return true;
 	}
+
+    @Override
+    public void notifyUpdate(QueryHolder qh){
+        update(qh);
+    }
 	
 }
