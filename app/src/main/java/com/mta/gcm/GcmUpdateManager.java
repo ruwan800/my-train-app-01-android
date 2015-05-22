@@ -3,8 +3,11 @@ package com.mta.gcm;
 import com.mta.db.QueryHolder;
 import com.mta.message.MessageModel;
 import com.mta.message.ThreadViewActivity;
+import com.mta.message.UpdateNotifyHandler;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class GcmUpdateManager {
 
     private static Map<String, AtomicInteger> threadUpdates = new ConcurrentHashMap<String, AtomicInteger>();
+    private static List<UpdateNotifyHandler> updateNotifyHandlers = new ArrayList<UpdateNotifyHandler>();
     private static long lastUpdate;
     private static final int DELAY = 20000;
     private static MessageModel messageModel;
@@ -37,6 +41,18 @@ public class GcmUpdateManager {
                 e.printStackTrace();
             }
         }
-        ThreadViewActivity.updateThread(threadId);
+        notifyHandlers(threadId);
+    }
+
+    public static void registerNotifier(UpdateNotifyHandler updateNotifyHandler){
+        if( !updateNotifyHandlers.contains(updateNotifyHandler)) {
+            updateNotifyHandlers.add(updateNotifyHandler);
+        }
+    }
+
+    private static void notifyHandlers(String threadId) {
+        for (UpdateNotifyHandler updateNotifyHandler : updateNotifyHandlers) {
+            updateNotifyHandler.notifyUpdate(threadId);
+        }
     }
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.mta.db.CONDITION;
 import com.mta.db.QueryHolder;
+import com.mta.gcm.GcmUpdateManager;
 import com.mta.main.R;
 
 import android.app.Activity;
@@ -21,7 +22,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class ThreadViewActivity extends ListActivity {
+public class ThreadViewActivity extends ListActivity implements UpdateNotifyHandler {
 
 	String TAG = "MTA";
 	private MessageModel threadModel;
@@ -52,9 +53,15 @@ public class ThreadViewActivity extends ListActivity {
 		threadModel = new MessageModel(this);
 		threadAdapter = new BaseListAdapter(this);
         threadAdapter.addViewType(DEFAULT, R.layout.list_item_message);
-        threadModel.addUpdateNotifier(threadAdapter);
+        //threadModel.addUpdateNotifier(threadAdapter);
+        GcmUpdateManager.registerNotifier(this);
 		new ThreadDataGetTask().execute();
 	}
+
+    @Override
+    public void notifyUpdate(String threadId) {
+        new ThreadDataUpdateTask().execute(threadId);
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,6 +92,19 @@ public class ThreadViewActivity extends ListActivity {
         data.put(TIME, new Date().toString());
         new MessageSendTask().execute(data);
     }
+
+    // Uses AsyncTask to create a task away from the main UI thread.
+    private class ThreadDataUpdateTask extends AsyncTask<String , Void, ArrayList<ContentValues>> {
+
+		@Override
+		protected ArrayList<ContentValues> doInBackground(String... params) {
+			return threadModel.getRecentThread(params[0], MESSAGE_LIMIT);
+		}
+		@Override
+		protected void onPostExecute(ArrayList<ContentValues> data) {
+            updateThread(data);
+		}
+	}
 
     // Uses AsyncTask to create a task away from the main UI thread.
     private class ThreadDataGetTask extends AsyncTask<Void, Void, ArrayList<ContentValues>> {

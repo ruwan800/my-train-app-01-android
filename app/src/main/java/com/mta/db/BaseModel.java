@@ -11,7 +11,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 
-public abstract class BaseModel extends ModelBuilder  implements ModelUpdateNotifyHandler {
+public abstract class BaseModel extends ModelBuilder {
 
 	private final String SYNCED = "synced";
 	private Context context;
@@ -90,13 +90,7 @@ public abstract class BaseModel extends ModelBuilder  implements ModelUpdateNoti
 		for(ContentValues cv : cvList){
 			DBC.add(cv);
 		}
-        notifyUpdates();
 		return true;
 	}
-
-    @Override
-    public void notifyUpdate(QueryHolder qh){
-        update(qh);
-    }
 	
 }

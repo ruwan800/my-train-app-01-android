@@ -59,16 +59,4 @@ public abstract class BaseBuilder {
 			return null;
 		}
 	}
-
-    public void addUpdateNotifier(UpdateNotifyHandler updateNotifyHandler) {
-        if ( ! updateNotifiers.contains(updateNotifyHandler)) {
-            updateNotifiers.add(updateNotifyHandler);
-        }
-    }
-
-    public void notifyUpdates(){
-        for (UpdateNotifyHandler updateNotifyHandler : updateNotifiers) {
-            updateNotifyHandler.notifyUpdate();
-        }
-    }
 }

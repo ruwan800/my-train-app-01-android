@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class BaseListAdapter extends BaseAdapter implements UpdateNotifyHandler{
+public class BaseListAdapter extends BaseAdapter {
 
 	private Map<String,Integer> viewTypeResources = new HashMap<String, Integer>();
 	private Map<String,View> typeViews = new HashMap<String, View>();
@@ -134,9 +134,4 @@ public class BaseListAdapter extends BaseAdapter implements UpdateNotifyHandler{
 		}
 		return convertView;
 	}
-
-    @Override
-    public void notifyUpdate() {
-        this.notifyDataSetChanged();
-    }
 }
