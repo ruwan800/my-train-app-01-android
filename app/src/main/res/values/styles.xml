@@ -17,4 +17,20 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="DarkGreen" parent="AppBaseTheme">
+        <item name="android:background">#3DA8A4</item>
+    </style>
+    <style name="Green" parent="AppBaseTheme">
+        <item name="android:background">#7ACCBE</item>
+    </style>
+    <style name="White" parent="AppBaseTheme">
+        <item name="android:background">#FFFFF7</item>
+    </style>
+    <style name="Red" parent="AppBaseTheme">
+        <item name="android:background">#FF99A1</item>
+    </style>
+    <style name="DarkRed" parent="AppBaseTheme">
+        <item name="android:background">#FF5879</item>
+    </style>
+
 </resources>
