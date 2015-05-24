@@ -33,11 +33,12 @@ public class ThreadViewActivity extends ListActivity implements UpdateNotifyHand
     public static final String TIME = "time";
     public static final String STAR = "star";
     public static final String THREAD_ID = "thread_id";
+    private static final String THREAD_NAME = "thread_name";
 	private static final int MESSAGE_LIMIT= 100;
     private ListView listView;
     private String threadId;
 
-	@Override
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -46,6 +47,8 @@ public class ThreadViewActivity extends ListActivity implements UpdateNotifyHand
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
         threadId = extras.getString(THREAD_ID);
+        String threadName = extras.getString(THREAD_NAME);
+        setTitle(threadName);
 		prepareThread();
 	}
 

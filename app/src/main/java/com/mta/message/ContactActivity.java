@@ -30,6 +30,7 @@ public class ContactActivity extends ListActivity {
 	private static final String STATION = "station";
 	private static final String TRAIN = "train";
     public static final String THREAD_ID = "thread_id";
+    private static final String THREAD_NAME = "thread_name";
     public static final String INFO = "info";
 	private static final String C_TYPE = ContactModel.C_TYPE;
     private ListView listView;
@@ -106,6 +107,7 @@ public class ContactActivity extends ListActivity {
 		Intent threadViewIntent = new Intent(this, ThreadViewActivity.class);
 		Bundle passData = new Bundle();
 		passData.putString(THREAD_ID, data.getAsString(THREAD_ID));
+		passData.putString(THREAD_NAME, data.getAsString(ContactModel.NAME));
 		threadViewIntent.putExtras(passData);
 		startActivity(threadViewIntent);
 		

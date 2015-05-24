@@ -20,23 +20,25 @@ import android.widget.ListView;
 
 public class ThreadCreateActivity extends ListActivity {
 
-	private NearbyModel nearbyModel;
-	private StationModel stationModel;
-	private TrainModel trainModel;
-	private ContactModel contactModel;
-	
+    private StationModel stationModel;
+    private TrainModel trainModel;
+    private ContactModel contactModel;
 	private BaseListAdapter nearbyListAdapter;
-	private BaseListAdapter stationListAdapter;
-	private BaseListAdapter trainListAdapter;
-	
-	private enum contactType { NEARBY, STATION, TRAIN	}
-	private contactType current_message_type = contactType.NEARBY;
 
+    private BaseListAdapter stationListAdapter;
+    private BaseListAdapter trainListAdapter;
+
+
+	private enum contactType { NEARBY, STATION, TRAIN}
+    private contactType current_message_type = contactType.NEARBY;
 	private static final String STATION = "station";
-	private static final String TRAIN = "train";
-	private static final String NAME = "name";
+
+    private static final String TRAIN = "train";
+    private static final String NAME = "name";
     public static final String ID = "ID";
     public static final String THREAD_ID = "thread_id";
+    private static final String THREAD_NAME = "thread_name";
+    private NearbyModel nearbyModel;
     public static final String INFO = "info";
     public static final String NUMBER = "number";
     public static final String DEFAULT = "default";
@@ -255,6 +257,7 @@ public class ThreadCreateActivity extends ListActivity {
 		Intent ThreadViewIntent = new Intent(this, ThreadViewActivity.class);
 		Bundle passData = new Bundle();
 		passData.putString(THREAD_ID, data.getAsString(THREAD_ID));
+		passData.putString(THREAD_NAME, data.getAsString(NAME));
 		ThreadViewIntent.putExtras(passData);
 		startActivity(ThreadViewIntent);
 		this.finish();

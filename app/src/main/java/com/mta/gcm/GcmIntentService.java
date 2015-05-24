@@ -45,6 +45,7 @@ public class GcmIntentService extends IntentService {
     Activity messageActivity;
     public static final String TAG = "MTA";
     public static final String THREAD_ID = "thread_id";
+    private static final String THREAD_NAME = "thread_name";
 
     public GcmIntentService() {
         super("GcmIntentService");
@@ -106,6 +107,7 @@ public class GcmIntentService extends IntentService {
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
         Bundle passData = new Bundle();
         passData.putString(THREAD_ID, reference);
+        passData.putString(THREAD_NAME, title);
         nextIntent.putExtras(passData);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, nextIntent, 0);
 
