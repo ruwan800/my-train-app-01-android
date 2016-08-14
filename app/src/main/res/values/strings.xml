@@ -3,7 +3,6 @@
 
     <string name="prompt_email">you@email.com</string>
     <!-- settings -->
-    <string name="gcm_project_id">232844167688</string>
     <string name="url_site">http://mta-ruwan800.rhcloud.com/</string>
     <string name="domain_site">mta-ruwan800.rhcloud.com</string>
 
